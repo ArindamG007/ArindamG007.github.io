@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Arindam Ghosh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #F8F7F4;
+    --surface:   #FFFFFF;
+    --border:    #E2E0D8;
+    --accent:    #2C5F6E;
+    --accent-lt: #EAF2F5;
+    --text:      #1C1C1A;
+    --muted:     #6B6B66;
+    --faint:     #9A9992;
+    --serif:     'EB Garamond', Georgia, serif;
+    --sans:      'DM Sans', system-ui, sans-serif;
+    --max:       780px;
+    --nav-h:     56px;
+  }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--nav-h);
+    background: rgba(248,247,244,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+  }
+  nav .brand {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.75rem;
+  }
+  nav ul a {
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--accent); }
+  .nav-toggle { display: none; cursor: pointer; border: none; background: none; padding: 4px; }
+  .nav-toggle span {
+    display: block; width: 22px; height: 1.5px;
+    background: var(--text); margin: 5px 0;
+    transition: transform 0.25s, opacity 0.25s;
+  }
+
+  /* ── LAYOUT ── */
+  main { max-width: var(--max); margin: 0 auto; padding: 0 2rem; }
+
+  section {
+    padding: 4.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-child { border-bottom: none; }
+
+  .sec-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 2rem;
+  }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 500; }
+
+  /* ── HERO ── */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: start;
+  }
+  .hero-text { }
+  .hero-text .greeting {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 0.75rem;
+  }
+  .hero-text h1 {
+    font-size: 2.6rem;
+    line-height: 1.15;
+    margin-bottom: 0.3rem;
+    letter-spacing: -0.01em;
+  }
+  .hero-text .role {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .hero-text p {
+    font-size: 0.97rem;
+    color: var(--muted);
+    max-width: 540px;
+    margin-bottom: 1rem;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.4rem 0;
+  }
+  .tag {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: var(--accent-lt);
+  }
+  .social-row {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+  .social-row a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 4px;
+    background: var(--surface);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .social-row a:hover { border-color: var(--accent); color: var(--accent); }
+  .social-row svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  .avatar-wrap {
+    width: 160px;
+    flex-shrink: 0;
+  }
+  .avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+  }
+  .avatar .initials {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    color: var(--accent);
+    user-select: none;
+  }
+
+  /* ── RESEARCH ── */
+  #research h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.35rem;
+  }
+  .research-intro {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    max-width: 580px;
+  }
+  .interest-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--border);
+    margin-bottom: 3rem;
+  }
+  .interest-card {
+    background: var(--surface);
+    padding: 1.5rem;
+  }
+  .interest-card .ic-num {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 0.6rem;
+  }
+  .interest-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .interest-card p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .pub-list { display: flex; flex-direction: column; gap: 1.2rem; }
+  .pub-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem 1rem;
+    align-items: start;
+  }
+  .pub-item h3 {
+    font-size: 0.97rem;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 0.3rem;
+    grid-column: 1;
+  }
+  .pub-meta {
+    font-size: 0.8rem;
+    color: var(--muted);
+    grid-column: 1;
+  }
+  .pub-badge {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: center;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .badge-wip { background: #FEF3C7; color: #92400E; }
+  .badge-conf { background: var(--accent-lt); color: var(--accent); }
+
+  /* ── ACADEMICS ── */
+  #academics h2 { font-size: 1.75rem; margin-bottom: 0.35rem; }
+  .acad-intro { font-size: 0.95rem; color: var(--muted); margin-bottom: 2.5rem; max-width: 580px; }
+  .timeline { position: relative; padding-left: 1.5rem; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: var(--border);
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 2.2rem;
+    padding-left: 1rem;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: 8px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .tl-item .tl-year {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 0.2rem;
+  }
+  .tl-item h3 { font-size: 1rem; margin-bottom: 0.15rem; }
+  .tl-item p { font-size: 0.85rem; color: var(--muted); }
+
+  /* ── PROJECTS ── */
+  #projects h2 { font-size: 1.75rem; margin-bottom: 0.35rem; }
+  .proj-intro { font-size: 0.95rem; color: var(--muted); margin-bottom: 2.5rem; max-width: 580px; }
+  .proj-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .proj-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: border-color 0.2s;
+  }
+  .proj-card:hover { border-color: var(--accent); }
+  .proj-card .proj-icon {
+    font-size: 1.4rem;
+    margin-bottom: 0.25rem;
+    opacity: 0.6;
+  }
+  .proj-card h3 { font-size: 0.97rem; }
+  .proj-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.55; flex: 1; }
+  .proj-link {
+    font-size: 0.78rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    margin-top: 0.25rem;
+    display: inline-block;
+  }
+  .proj-link:hover { text-decoration: underline; }
+
+  /* ── BLOG ── */
+  #blog h2 { font-size: 1.75rem; margin-bottom: 0.35rem; }
+  .blog-intro { font-size: 0.95rem; color: var(--muted); margin-bottom: 2.5rem; max-width: 580px; }
+  .blog-list { display: flex; flex-direction: column; gap: 0; }
+  .blog-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0 1.5rem;
+    align-items: center;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s;
+  }
+  .blog-item:last-child { border-bottom: none; }
+  .blog-item:hover .blog-title { color: var(--accent); }
+  .blog-date {
+    font-size: 0.78rem;
+    color: var(--faint);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    min-width: 72px;
+  }
+  .blog-title {
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+  .blog-tag-pill {
+    font-size: 0.68rem;
+    padding: 2px 8px;
+    background: var(--accent-lt);
+    color: var(--accent);
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* ── CONTACT ── */
+  #contact h2 { font-size: 1.75rem; margin-bottom: 0.35rem; }
+  .contact-intro { font-size: 0.95rem; color: var(--muted); margin-bottom: 2.5rem; max-width: 560px; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .contact-card svg {
+    width: 18px; height: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--accent);
+  }
+  .contact-card .cc-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 0.2rem;
+  }
+  .contact-card .cc-val {
+    font-size: 0.9rem;
+    color: var(--text);
+    word-break: break-all;
+  }
+  .contact-card a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .contact-card a:hover { color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    color: var(--faint);
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    nav ul { display: none; position: absolute; top: var(--nav-h); left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); flex-direction: column; padding: 1rem 2rem; gap: 1.2rem; }
+    nav ul.open { display: flex; }
+    .nav-toggle { display: block; }
+    #about { grid-template-columns: 1fr; }
+    .avatar-wrap { order: -1; }
+    .avatar { width: 80px; height: 80px; }
+    .avatar .initials { font-size: 1.4rem; }
+    .hero-text h1 { font-size: 1.9rem; }
+    .interest-grid { grid-template-columns: 1fr; }
+    .proj-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .blog-item { grid-template-columns: 1fr; gap: 0.15rem; }
+    .blog-date { display: none; }
+  }
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a class="brand" href="#about">Arindam Ghosh</a>
+  <ul id="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#academics">Academics</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="hero-text fade-in">
+      <p class="greeting">Hello, I am</p>
+      <h1>Arindam Ghosh</h1>
+      <p class="role">Junior Research Fellow in Cryptography</p>
+      <p>
+        I am a JRF student at the <a href="https://www.isical.ac.in/" style="color:var(--accent);text-decoration:none;" target="_blank">Indian Statistical Institute, Kolkata</a>, 
+        working on the cryptanalysis of Multivariate Public Key Cryptography (MPKC) within the broader landscape of post-quantum cryptography.
+      </p>
+      <p>
+        My work sits at the intersection of finite field algebra, multivariate polynomial systems and computational hardness.
+      </p>
+      <div class="tags">
+        <span class="tag">Multivariate Public Key Cryptography</span>
+        <span class="tag">Post-Quantum Cryptography</span>
+        <span class="tag">Cryptanalysis</span>
+        <!-- <span class="tag">ISI Kolkata</span> -->
+      </div>
+      <div class="social-row">
+        <a href="mailto:your.email@isical.ac.in">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email
+        </a>
+        <a href="https://scholar.google.com" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 14l-8-5 8-5 8 5z"/><path d="M12 14v7M4 9v6a8 8 0 0 0 16 0V9"/></svg>
+          Scholar
+        </a>
+        <a href="https://github.com/ArindamG007" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/arindam-g/" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+    <div class="avatar-wrap fade-in" style="transition-delay:0.15s">
+      <div class="avatar">
+        <!-- Replace src with your photo path when ready -->
+        <img src="" alt="Arindam Ghosh" id="avatar-img" />
+        <span class="initials" id="avatar-initials">AG</span>
+      </div>
+      <p style="font-size:0.72rem;color:var(--faint);text-align:center;margin-top:0.6rem;line-height:1.4;">
+        ISI Kolkata<br/>Cryptology &amp; Security
+      </p>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <p class="sec-label">02 — Research</p>
+    <h2 class="fade-in">Research Interests</h2>
+    <p class="research-intro fade-in">
+      My research focuses on understanding the algebraic structure underlying multivariate cryptosystems and exploiting it to assess their real-world security in the post-quantum era.
+    </p>
+
+    <div class="interest-grid fade-in">
+      <div class="interest-card">
+        <div class="ic-num">01</div>
+        <h3>Multivariate Public Key Cryptography</h3>
+        <p>Studying the hardness of solving systems of multivariate polynomial equations over finite fields, and the design and cryptanalysis of MPKC schemes.</p>
+      </div>
+      <div class="interest-card">
+        <div class="ic-num">02</div>
+        <h3>Post-Quantum Cryptography</h3>
+        <p>Exploring cryptographic primitives that are believed to be secure against quantum adversaries, with a focus on standardisation and practical security analysis.</p>
+      </div>
+      <div class="interest-card">
+        <div class="ic-num">03</div>
+        <h3>Algebraic Cryptanalysis</h3>
+        <p>Applying Gröbner basis methods and algebraic techniques to assess the concrete security of cryptographic schemes.</p>
+      </div>
+      <div class="interest-card">
+        <div class="ic-num">04</div>
+        <h3>Computational Complexity</h3>
+        <p>Investigating the theoretical foundations of hard problems that underpin cryptographic security assumptions.</p>
+      </div>
+    </div>
+
+    <p class="sec-label" style="margin-top:3rem;">Publications &amp; Preprints</p>
+    <div class="pub-list fade-in">
+      <div class="pub-item">
+        <h3>Add your paper title here — e.g. On the Security of a Class of MPKC Schemes</h3>
+        <p class="pub-meta">Arindam Ghosh · 2025 · Preprint / Venue Name</p>
+        <span class="pub-badge badge-wip">In progress</span>
+      </div>
+      <div class="pub-item">
+        <h3>Another paper or manuscript title goes here</h3>
+        <p class="pub-meta">Arindam Ghosh · Co-author · 2024 · Venue Name</p>
+        <span class="pub-badge badge-conf">Published</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACADEMICS -->
+  <section id="academics">
+    <p class="sec-label">03 — Academics</p>
+    <h2 class="fade-in">Education &amp; Background</h2>
+    <p class="acad-intro fade-in">
+      My academic journey has been shaped by a deep curiosity about the mathematical structures underlying secure communication.
+    </p>
+    <div class="timeline fade-in">
+      <div class="tl-item">
+        <div class="tl-year">2024 — present</div>
+        <h3>Junior Research Fellow (JRF) · Ph.D. Programme</h3>
+        <p>Indian Statistical Institute, Kolkata — Cryptology &amp; Security Unit<br/>
+        Focus: Cryptanalysis of Multivariate Public Key Cryptography<br/>
+        Advisor: [Your Advisor's Name]</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">20XX — 20XX</div>
+        <h3>M.Sc. / B.Sc. in [Subject]</h3>
+        <p>[University Name], [City]<br/>
+        Brief note about your specialisation or thesis topic.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">20XX</div>
+        <h3>Bachelor of Science in [Subject]</h3>
+        <p>[University Name], [City]</p>
+      </div>
+    </div>
+
+    <p class="sec-label" style="margin-top:3rem;">Courses &amp; Schools</p>
+    <div class="timeline fade-in">
+      <div class="tl-item">
+        <div class="tl-year">2026</div>
+        <h3>AsiaCCS 2026 — Attendee</h3>
+        <p>ACM Asia Conference on Computer and Communications Security — networking and learning in the post-quantum space.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">20XX</div>
+        <h3>[Summer School / Workshop Name]</h3>
+        <p>[Organiser], [Location]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="sec-label">04 — Projects</p>
+    <h2 class="fade-in">Projects</h2>
+    <p class="proj-intro fade-in">
+      A mix of research-adjacent work, technical explorations, and side projects.
+    </p>
+    <div class="proj-grid fade-in">
+      <div class="proj-card">
+        <div class="proj-icon">🔐</div>
+        <h3>MPKC Solver Benchmark</h3>
+        <p>A comparative study of Gröbner basis and XL algorithm performance on multivariate systems of varying degree and density.</p>
+        <a class="proj-link" href="#">View on GitHub →</a>
+      </div>
+      <div class="proj-card">
+        <div class="proj-icon">📐</div>
+        <h3>PQC Reading Group Notes</h3>
+        <p>Structured notes from the ISI Kolkata reading group on NIST post-quantum candidates — covering lattice, code-based, and multivariate families.</p>
+        <a class="proj-link" href="#">Read notes →</a>
+      </div>
+      <div class="proj-card">
+        <div class="proj-icon">⚙️</div>
+        <h3>Project Three</h3>
+        <p>Describe this project briefly. What problem does it solve? What did you build or explore?</p>
+        <a class="proj-link" href="#">Link →</a>
+      </div>
+      <div class="proj-card">
+        <div class="proj-icon">📊</div>
+        <h3>Project Four</h3>
+        <p>Add another project here. Research tools, implementations, simulations, or anything you want to highlight.</p>
+        <a class="proj-link" href="#">Link →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog">
+    <p class="sec-label">05 — Blog</p>
+    <h2 class="fade-in">Writing</h2>
+    <p class="blog-intro fade-in">
+      Occasional notes on cryptography, mathematics, and ideas I find worth writing about.
+    </p>
+    <div class="blog-list fade-in">
+      <a class="blog-item" href="#">
+        <span class="blog-date">Jun 2025</span>
+        <span class="blog-title">What is the MQ Problem, and why does it matter for post-quantum security?</span>
+        <span class="blog-tag-pill">Explainer</span>
+      </a>
+      <a class="blog-item" href="#">
+        <span class="blog-date">May 2025</span>
+        <span class="blog-title">A first look at UOV: Unbalanced Oil and Vinegar signatures</span>
+        <span class="blog-tag-pill">Cryptography</span>
+      </a>
+      <a class="blog-item" href="#">
+        <span class="blog-date">Apr 2025</span>
+        <span class="blog-title">Notes from AsiaCCS 2026 — what I learned and who I met</span>
+        <span class="blog-tag-pill">Conference</span>
+      </a>
+      <a class="blog-item" href="#">
+        <span class="blog-date">Mar 2025</span>
+        <span class="blog-title">Your next post title here</span>
+        <span class="blog-tag-pill">Topic</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="sec-label">06 — Contact</p>
+    <h2 class="fade-in">Get in Touch</h2>
+    <p class="contact-intro fade-in">
+      I am always happy to discuss research, potential collaborations, or questions about post-quantum cryptography. Feel free to reach out.
+    </p>
+    <div class="contact-grid fade-in">
+      <div class="contact-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <div>
+          <div class="cc-label">Personal Email</div>
+          <div class="cc-val"><a href="mailto:arindamghosh20042002@gmail.com">arindamghosh20042002@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <div>
+          <div class="cc-label">ISI Email</div>
+          <div class="cc-val"><a href="mailto:arindam.quantum_r@isical.ac.in">arindam.quantum_r@isical.ac.in</a></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <div>
+          <div class="cc-label">IITJ Email</div>
+          <div class="cc-val"><a href="mailto:m23ma1004@iitj.ac.in">m23ma1004@iitj.ac.in</a></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        <div>
+          <div class="cc-label">GitHub</div>
+          <div class="cc-val"><a href="https://github.com/yourgithub" target="_blank">github.com/yourgithub</a></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 14l-8-5 8-5 8 5z"/><path d="M12 14v7M4 9v6a8 8 0 0 0 16 0V9"/></svg>
+        <div>
+          <div class="cc-label">Google Scholar</div>
+          <div class="cc-val"><a href="https://scholar.google.com" target="_blank">View profile →</a></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <div>
+          <div class="cc-label">LinkedIn</div>
+          <div class="cc-val"><a href="https://linkedin.com/in/yourlinkedin" target="_blank">View profile →</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.25rem 1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;">
+      <p style="font-size:0.85rem;color:var(--muted);">
+        📍 &nbsp;Cryptology &amp; Security Unit (Applied Statistics Unit) · Indian Statistical Institute · 203 B.T. Road, Kolkata 700108, India
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2025 Arindam Ghosh</span>
+  <span>Indian Statistical Institute, Kolkata</span>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const toggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Avatar: show image if it loads
+  const img = document.getElementById('avatar-img');
+  const initials = document.getElementById('avatar-initials');
+  if (img && img.src && img.src !== window.location.href) {
+    img.onload = () => { img.style.display = 'block'; initials.style.display = 'none'; };
+  }
+
+  // Active nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navAs = document.querySelectorAll('nav ul a');
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navAs.forEach(a => a.style.color = '');
+        const active = document.querySelector(`nav ul a[href="#${e.target.id}"]`);
+        if (active) active.style.color = 'var(--accent)';
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => spy.observe(s));
+</script>
+</body>
+</html>
