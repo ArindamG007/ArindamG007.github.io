@@ -145,7 +145,6 @@
     gap: 3rem;
     align-items: start;
   }
-  .hero-text { }
   .hero-text .greeting {
     font-size: 0.72rem;
     font-weight: 500;
@@ -621,7 +620,7 @@
       </div>
     </div>
 
-    <p class="sec-label" style="margin-top:3rem;">Publications &amp; Preprints</p>
+    <!-- <p class="sec-label" style="margin-top:3rem;">Publications &amp; Preprints</p>
     <div class="pub-list fade-in">
       <div class="pub-item">
         <h3>Add your paper title here — e.g. On the Security of a Class of MPKC Schemes</h3>
@@ -633,7 +632,7 @@
         <p class="pub-meta">Arindam Ghosh · Co-author · 2024 · Venue Name</p>
         <span class="pub-badge badge-conf">Published</span>
       </div>
-    </div>
+    </div> -->
   </section>
 
   <!-- ACADEMICS done -->
@@ -650,6 +649,13 @@
         <p>Indian Statistical Institute, Kolkata — Cryptology &amp; Security Research Unit<br/>
         Focus: Cryptanalysis of Multivariate Public Key Cryptography<br/>
         Advisor: <a href="https://sites.google.com/view/mriganka-mandal" target="_blank" style="color:var(--accent);text-decoration:none;">Dr. Mriganka Mandal</a></p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">May 2024 — July 2024</div>
+        <h3>Summer Internship</h3>
+        <p>Indian Institute of Tropical Meteorology, Pune<br/>
+        Topic: Influence of Initial Conditions in Global Forecast System model (GFS T1534) for predicting heavy and extreme rainfall over India<br/>
+        Advisor: <a href="https://www.tropmet.res.in/206-Malay%20%20Ganai-scientist_detail" target="_blank" style="color:var(--accent);text-decoration:none;">Dr. Malay Ganai</a></p>
       </div>
       <div class="tl-item">
         <div class="tl-year">2023 — 2025</div>
@@ -693,7 +699,7 @@
   </section>
 
   <!-- PROJECTS -->
-  <!-- <section id="projects">
+  <section id="projects">
     <p class="sec-label">04 — Projects</p>
     <h2 class="fade-in">Projects</h2>
     <p class="proj-intro fade-in">
@@ -701,31 +707,22 @@
     </p>
     <div class="proj-grid fade-in">
       <div class="proj-card">
-        <div class="proj-icon">🔐</div>
-        <h3>MPKC Solver Benchmark</h3>
-        <p>A comparative study of Gröbner basis and XL algorithm performance on multivariate systems of varying degree and density.</p>
-        <a class="proj-link" href="#">View on GitHub →</a>
+        <h3>M.Sc. Project — Trail Search Algorithms for Block Ciphers</h3>
+        <p>This project investigates trail search algorithms for block ciphers, with a focus on identifying optimal differential trails to enhance cryptographic security. Using the lightweight MIDORI cipher as a case study, the research analyzes AES-like structures and implements two key algorithms: the Difference Distribution Table method and Matsui’s depth-first search technique.</p>
+        <p>The report also investigates permutation characteristics in AES-like block ciphers, concentrating on how linear layers composed of permutation matrices influence the structure and equivalence of differential trails. We define and analyze the concept of permutation characteristics and leverage their properties to reduce redundancy in trail search algorithms.</p>
+        <p>By identifying equivalence classes via first-round word-wise permutations, we construct reduced activity patterns that significantly reduce the search space. These methods provide computational tools to evaluate the resistance of block ciphers to differential cryptanalysis and highlight opportunities to refine and adapt the algorithms to various cipher designs.</p>
+          <a class="proj-link" href="msc_report.pdf" target="_blank" rel="noopener">Read report (PDF) →</a>
       </div>
+      
       <div class="proj-card">
-        <div class="proj-icon">📐</div>
-        <h3>PQC Reading Group Notes</h3>
-        <p>Structured notes from the ISI Kolkata reading group on NIST post-quantum candidates — covering lattice, code-based, and multivariate families.</p>
-        <a class="proj-link" href="#">Read notes →</a>
-      </div>
-      <div class="proj-card">
-        <div class="proj-icon">⚙️</div>
-        <h3>Project Three</h3>
-        <p>Describe this project briefly. What problem does it solve? What did you build or explore?</p>
-        <a class="proj-link" href="#">Link →</a>
-      </div>
-      <div class="proj-card">
-        <div class="proj-icon">📊</div>
-        <h3>Project Four</h3>
-        <p>Add another project here. Research tools, implementations, simulations, or anything you want to highlight.</p>
-        <a class="proj-link" href="#">Link →</a>
+        <h3>Influence of Initial Conditions on Extreme Rainfall Prediction</h3>
+        <p style="font-weight:500;margin-bottom:0.25rem;">Summer Internship · Indian Institute of Tropical Meteorology, Pune · May–July 2024</p>
+        <p>Investigated how the choice of model initialization time (00Z, 06Z, 12Z) affects the accuracy of heavy and extreme rainfall forecasts over India using the NCEP Global Forecast System (GFS T1534). Analyzed 10 extreme rainfall events from 2020–2023 monsoon seasons, comparing Day-1 and Day-2 GFS forecasts against IMD-GPM observed rainfall data and ERA5 reanalysis. Examined atmospheric dynamics — horizontal divergence, moisture convergence, and vertical velocity — to understand forecast failures and successes. Key finding: the GFS model consistently underestimates rainfall intensity, and 06Z initialization produced the best forecasts in the majority of cases.</p>
+        <p style="margin-bottom:0.4rem;">Supervised by Dr. Malay Ganai, Scientist-D, Forecasting Research Division, IITM Pune.</p>
+          <a class="proj-link" href="iitm_report.pdf" target="_blank" rel="noopener">Read report (PDF) →</a>
       </div>
     </div>
-  </section> -->
+  </section>
 
   <!-- BLOG -->
   <!-- <section id="blog">
