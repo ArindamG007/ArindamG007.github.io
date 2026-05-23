@@ -362,7 +362,8 @@
   .proj-intro { font-size: 0.95rem; color: var(--muted); margin-bottom: 2.5rem; max-width: 580px; }
   .proj-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* grid-template-columns: 1fr 1fr; */
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
   .proj-card {
@@ -393,6 +394,16 @@
     display: inline-block;
   }
   .proj-link:hover { text-decoration: underline; }
+
+  .read-more-btn {
+    background: none;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0;
+  }
+  .proj-more[hidden] { display: none; }
 
   /* ── BLOG ── */
   #blog h2 { font-size: 1.75rem; margin-bottom: 0.35rem; }
@@ -654,14 +665,14 @@
         <div class="tl-year">May 2024 — July 2024</div>
         <h3>Summer Internship</h3>
         <p>Indian Institute of Tropical Meteorology, Pune<br/>
-        Topic: Influence of Initial Conditions in Global Forecast System model (GFS T1534) for predicting heavy and extreme rainfall over India<br/>
+        Topic: <a href="#iitm-project" style="color:var(--accent);text-decoration:none;">Influence of Initial Conditions in Global Forecast System model (GFS T1534) for predicting heavy and extreme rainfall over India</a><br/>
         Advisor: <a href="https://www.tropmet.res.in/206-Malay%20%20Ganai-scientist_detail" target="_blank" style="color:var(--accent);text-decoration:none;">Dr. Malay Ganai</a></p>
       </div>
       <div class="tl-item">
         <div class="tl-year">2023 — 2025</div>
         <h3>M.Sc. Mathematics</h3>
         <p>Indian Institute of Technology Jodhpur<br/>
-        M.Sc. project topic: Trail search algorithms for block ciphers<br/>
+        M.Sc. project topic: <a href="#msc-project" style="color:var(--accent);text-decoration:none;">Trail search algorithms for block ciphers</a><br/>
         Advisor: <a href="https://sites.google.com/view/bimal-mandal" target="_blank" style="color:var(--accent);text-decoration:none;">Dr. Bimal Mandal</a>
       </p>
       </div>
@@ -706,19 +717,22 @@
       A mix of research-adjacent work, technical explorations, and side projects.
     </p>
     <div class="proj-grid fade-in">
-      <div class="proj-card">
+      <div class="proj-card" id="msc-project">
         <h3>M.Sc. Project — Trail Search Algorithms for Block Ciphers</h3>
         <p>This project investigates trail search algorithms for block ciphers, with a focus on identifying optimal differential trails to enhance cryptographic security. Using the lightweight MIDORI cipher as a case study, the research analyzes AES-like structures and implements two key algorithms: the Difference Distribution Table method and Matsui’s depth-first search technique.</p>
-        <p>The report also investigates permutation characteristics in AES-like block ciphers, concentrating on how linear layers composed of permutation matrices influence the structure and equivalence of differential trails. We define and analyze the concept of permutation characteristics and leverage their properties to reduce redundancy in trail search algorithms.</p>
-        <p>By identifying equivalence classes via first-round word-wise permutations, we construct reduced activity patterns that significantly reduce the search space. These methods provide computational tools to evaluate the resistance of block ciphers to differential cryptanalysis and highlight opportunities to refine and adapt the algorithms to various cipher designs.</p>
-          <a class="proj-link" href="msc_report.pdf" target="_blank" rel="noopener">Read report (PDF) →</a>
+        <div class="proj-more" hidden>
+          <p>The report also investigates permutation characteristics in AES-like block ciphers, concentrating on how linear layers composed of permutation matrices influence the structure and equivalence of differential trails. We define and analyze the concept of permutation characteristics and leverage their properties to reduce redundancy in trail search algorithms.</p>
+          <p>By identifying equivalence classes via first-round word-wise permutations, we construct reduced activity patterns that significantly reduce the search space. These methods provide computational tools to evaluate the resistance of block ciphers to differential cryptanalysis and highlight opportunities to refine and adapt the algorithms to various cipher designs.</p>
+        </div>
+        <button class="read-more-btn" aria-expanded="false">Read more</button>
+        <a class="proj-link" href="msc_report.pdf" target="_blank" rel="noopener">Read report (PDF) →</a>
       </div>
       
-      <div class="proj-card">
+      <div class="proj-card" id="iitm-project">
         <h3>Influence of Initial Conditions on Extreme Rainfall Prediction</h3>
         <p style="font-weight:500;margin-bottom:0.25rem;">Summer Internship · Indian Institute of Tropical Meteorology, Pune · May–July 2024</p>
-        <p>Investigated how the choice of model initialization time (00Z, 06Z, 12Z) affects the accuracy of heavy and extreme rainfall forecasts over India using the NCEP Global Forecast System (GFS T1534). Analyzed 10 extreme rainfall events from 2020–2023 monsoon seasons, comparing Day-1 and Day-2 GFS forecasts against IMD-GPM observed rainfall data and ERA5 reanalysis. Examined atmospheric dynamics — horizontal divergence, moisture convergence, and vertical velocity — to understand forecast failures and successes. Key finding: the GFS model consistently underestimates rainfall intensity, and 06Z initialization produced the best forecasts in the majority of cases.</p>
-        <p style="margin-bottom:0.4rem;">Supervised by Dr. Malay Ganai, Scientist-D, Forecasting Research Division, IITM Pune.</p>
+        <p>This project investigated how the choice of model initialization time (00Z, 06Z, 12Z) affects the accuracy of heavy and extreme rainfall forecasts over India using the Global Forecast System (GFS T1534). Analyzed 10 extreme rainfall events from 2020–2023 monsoon seasons, comparing Day-1 and Day-2 GFS forecasts against IMD-GPM observed rainfall data and ERA5 reanalysis. Examined atmospheric dynamics — horizontal divergence, moisture convergence, and vertical velocity — to understand forecast failures and successes. Key finding: the GFS model consistently underestimates rainfall intensity, and 06Z initialization produced the best forecasts in the majority of cases.</p>
+        <!-- <p style="margin-bottom:0.4rem;">Supervised by Dr. Malay Ganai, Scientist-D, Forecasting Research Division, IITM Pune.</p> -->
           <a class="proj-link" href="iitm_report.pdf" target="_blank" rel="noopener">Read report (PDF) →</a>
       </div>
     </div>
@@ -884,6 +898,25 @@
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
   sections.forEach(s => spy.observe(s));
+
+  // Read more toggle for project cards
+  document.querySelectorAll('.proj-card').forEach(card => {
+    const btn = card.querySelector('.read-more-btn');
+    const more = card.querySelector('.proj-more');
+    if (!btn || !more) return;
+    btn.addEventListener('click', () => {
+      const isHidden = more.hasAttribute('hidden');
+      if (isHidden) {
+        more.removeAttribute('hidden');
+        btn.textContent = 'Read less';
+        btn.setAttribute('aria-expanded', 'true');
+      } else {
+        more.setAttribute('hidden', '');
+        btn.textContent = 'Read more';
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
 </script>
 </body>
 </html>
