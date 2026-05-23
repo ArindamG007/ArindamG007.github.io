@@ -404,6 +404,7 @@
     padding: 0;
   }
   .proj-more[hidden] { display: none; }
+  .visit-counter { font-size: 0.82rem; color: var(--muted); }
 
   /* ── BLOG ── */
   #blog h2 { font-size: 1.75rem; margin-bottom: 0.35rem; }
@@ -833,6 +834,7 @@
 <footer>
   <span>© 2026 Arindam Ghosh</span>
   <span>Indian Statistical Institute, Kolkata</span>
+  <span id="visit-counter" class="visit-counter">&nbsp;•&nbsp;Visitors: <strong id="visit-count">—</strong></span>
 </footer>
 
 <script>
@@ -917,6 +919,27 @@
       }
     });
   });
+
+  // Visitor counter using CountAPI (works on GitHub Pages)
+  (function(){
+    const countEl = document.getElementById('visit-count');
+    function setCount(n){ if (countEl) countEl.textContent = String(n); }
+    const namespace = 'arindam-website';
+    const key = 'visits';
+    const url = `https://api.countapi.xyz/hit/${namespace}/${key}`;
+    fetch(url, { cache: 'no-store' })
+      .then(r => r.json())
+      .then(data => { if (data && typeof data.value !== 'undefined') setCount(data.value); else setCount('—'); })
+      .catch(() => {
+        // Fallback: localStorage per-browser marker
+        try {
+          const markerKey = 'site_visited_v1';
+          const stored = localStorage.getItem(markerKey);
+          if (!stored) localStorage.setItem(markerKey, Date.now());
+          setCount(stored ? 1 : 1);
+        } catch (e) { setCount('—'); }
+      });
+  })();
 </script>
 </body>
 </html>
